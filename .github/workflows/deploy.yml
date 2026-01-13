@@ -1,0 +1,58 @@
+name: Deploy Website on push
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy-docs-ftp:
+    name: Deploy Docs to GitHub Pages
+    if: github.actor != 'dependabot[bot]' && !contains(github.event.head_commit.message, '[skip ci]') && github.repository == 'zanedeng/zanejs'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: ./.github/actions/setup-node
+
+      - name: Build
+        run: pnpm build
+
+      - name: Clone zanedeng.github.io repository
+        run: |
+          git clone https://zanedeng:${{ secrets.API_TOKEN_GITHUB }}@github.com/zanedeng/zanedeng.github.io.git destination_repo
+
+      - name: Backup all files in the repository
+        run: |
+         mkdir -p dist/backup
+         cp -r destination_repo/* dist/backup/
+
+      - name: Remove all files from the repository
+        run: |
+          cd destination_repo
+          git rm -r *
+
+      - name: Commit and push changes
+        run: |
+          cd destination_repo
+          git config --local user.email ${{ secrets.USER_EMAIL }}
+          git config --local user.name ${{ secrets.USER_NAME }}
+          git commit -m "Remove all files"
+          git push origin main
+
+      - name: Push to zanedeng.github.io
+        id: push_directory
+        uses: cpina/github-action-push-to-another-repository@target-branch
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+        with:
+          source-directory: ./docs/.vitepress/dist
+          destination-github-username: 'zanedeng'
+          destination-repository-name: 'zanedeng.github.io'
+          user-email: ${{ secrets.USER_EMAIL }}
+          commit-message: See ORIGIN_COMMIT from $GITHUB_REF
+          target-branch: main
