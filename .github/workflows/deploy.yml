@@ -22,29 +22,7 @@ jobs:
       - name: Build
         run: pnpm build
 
-      - name: Clone zane-ui-docs repository
-        run: |
-          git clone https://zanelab:${{ secrets.API_TOKEN_GITHUB }}@github.com/zanelab/zane-ui-docs.git destination_repo
-
-      - name: Backup all files in the repository
-        run: |
-         mkdir -p dist/backup
-         cp -r destination_repo/* dist/backup/
-
-      - name: Remove all files from the repository
-        run: |
-          cd destination_repo
-          git rm -r *
-
-      - name: Commit and push changes
-        run: |
-          cd destination_repo
-          git add .
-          git config --local user.email ${{ secrets.USER_EMAIL }}
-          git config --local user.name ${{ secrets.USER_NAME }}
-          git commit --allow-empty -m "Remove all files"
-          git push origin main
-
+      
       - name: Push to zane-ui-docs
         id: push_directory
         uses: cpina/github-action-push-to-another-repository@target-branch
