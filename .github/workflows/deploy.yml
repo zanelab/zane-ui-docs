@@ -39,6 +39,8 @@ jobs:
           version: 10.13.0
       - name: Setup Pages
         uses: actions/configure-pages@v5
+        with:
+          enablement: true
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
       - name: Build with VitePress
