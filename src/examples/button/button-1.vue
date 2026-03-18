@@ -28,12 +28,12 @@
     </div>
 
     <div class="button-row">
-      <zane-button icon="search" circle />
-      <zane-button type="primary" icon="close" circle />
-      <zane-button type="success" icon="delete" circle />
-      <zane-button type="info" icon="info-filled" circle />
-      <zane-button type="warning" icon="warning-filled" circle />
-      <zane-button type="danger" icon="warn-triangle-filled" circle />
+      <zane-button icon="search-line" circle />
+      <zane-button type="primary" icon="close-line" circle />
+      <zane-button type="success" icon="delete-bin-5-line" circle />
+      <zane-button type="info" icon="information-line" circle />
+      <zane-button type="warning" icon="error-warning-line" circle />
+      <zane-button type="danger" icon="folder-warning-line" circle />
     </div>
   </div>
 </template>

@@ -17,9 +17,9 @@
       <zane-button size="small" icon="search" round>Search</zane-button>
     </div>
     <div class="flex flex-wrap items-center">
-      <zane-button icon="search" size="large" circle />
-      <zane-button icon="search" circle />
-      <zane-button icon="search" size="small" circle />
+      <zane-button icon="search-line" size="large" circle />
+      <zane-button icon="search-line" circle />
+      <zane-button icon="search-line" size="small" circle />
     </div>
   </div>
 </template>

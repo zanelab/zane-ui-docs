@@ -8,7 +8,7 @@ on:
 jobs:
   deploy-docs-ftp:
     name: Deploy Docs to GitHub Pages
-    if: github.actor != 'dependabot[bot]' && !contains(github.event.head_commit.message, '[skip ci]') && github.repository == 'zanedeng/zanejs'
+    if: github.actor != 'dependabot[bot]' && !contains(github.event.head_commit.message, '[skip ci]') && github.repository == 'zanelab/zane-ui-docs'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -22,9 +22,9 @@ jobs:
       - name: Build
         run: pnpm build
 
-      - name: Clone zanedeng.github.io repository
+      - name: Clone zane-ui-docs repository
         run: |
-          git clone https://zanedeng:${{ secrets.API_TOKEN_GITHUB }}@github.com/zanedeng/zanedeng.github.io.git destination_repo
+          git clone https://zanelab:${{ secrets.API_TOKEN_GITHUB }}@github.com/zanelab/zane-ui-docs.git destination_repo
 
       - name: Backup all files in the repository
         run: |
@@ -45,15 +45,15 @@ jobs:
           git commit --allow-empty -m "Remove all files"
           git push origin main
 
-      - name: Push to zanedeng.github.io
+      - name: Push to zane-ui-docs
         id: push_directory
         uses: cpina/github-action-push-to-another-repository@target-branch
         env:
           API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
         with:
           source-directory: ./.vitepress/dist
-          destination-github-username: 'zanedeng'
-          destination-repository-name: 'zanedeng.github.io'
+          destination-github-username: 'zanelab'
+          destination-repository-name: 'zane-ui-docs'
           user-email: ${{ secrets.USER_EMAIL }}
           commit-message: See ORIGIN_COMMIT from $GITHUB_REF
-          target-branch: main
+          target-branch: gh-pages

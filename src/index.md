@@ -1,12 +1,12 @@
 ---
 layout: home
-title: 'ZaneJS'
+title: 'ZaneUI'
 
 hero:
   image:
     src: /logo.svg
-    alt: ZaneJS
-  name: 'ZaneJS'
+    alt: ZaneUI
+  name: 'ZaneUI'
   text: 探索前端新视界
   tagline: 探索 · 创造 · 分享
   actions:

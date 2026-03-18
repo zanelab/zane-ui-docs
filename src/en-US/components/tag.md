@@ -1,43 +1,71 @@
 # Tag
 
-## When To Use
+Used for marking and selection.
 
-- It can be used to tag by dimension or property.
-- When categorizing.
+## Basic usage
 
-## Demo
+Use the `type` attribute to define Tag's type. In addition, the `color` attribute can be used to set the background color of the Tag.
 
-### Basic Usage
+:::demo src=examples/tag/basic.vue :::
 
-:::demo src=examples/tag/tag-1.vue :::
+## Removable Tag
+
+`closable` attribute can be used to define a removable tag. It accepts a `Boolean`. `zClose` event triggers when Tag is removed.
+
+:::demo src=examples/tag/removable.vue :::
+
+## Edit Dynamically
+
+You can use the `zClose` event to add and remove tag dynamically.
+
+:::demo src=examples/tag/editable.vue :::
+
+## Sizes
+
+Besides default size, Tag component provides three additional sizes for you to choose among different scenarios.
+
+Use attribute `size` to set additional sizes with `large`, `default` or `small`.
+
+:::demo src=examples/tag/sizes.vue :::
+
+## Theme
+
+Tag provide three different themes: `dark`、`light` and `plain`
+
+Using `effect` to change, default is `light`
+
+:::demo src=examples/tag/theme.vue :::
+
+## Rounded
+
+Tag can also be rounded like button.
+
+:::demo src=examples/tag/rounded.vue :::
+
 
 ## API
 
-### Properties
+### Attributes
 
-| Property | Attribute | Description | Type | Default |
-| --- | --- | --- | --- | --- |
-| `color` | `color` | Label color theme provides 10 preset color schemes to meet the visual needs of different scenarios: <br>1. `blue`: blue theme (neutral information) <br>2. `error`: error red (failed operation/dangerous state) <br>3. `gray`: gray theme (default neutral color) <br>4. `green`: green theme (success/completion state) <br>5. `info`: information blue (notification/prompt information) <br>6. `primary`: brand primary color (important content) <br>7. `red`: warning red (urgent notification) <br>8. `success`: success green (successful operation) <br>9. `warning`: warning yellow (attention/reminder) <br>10. `yellow`: emphasis yellow (highlighted display) | `"blue" \| "error" \| "gray" \| "green" \| "info" \| "primary" \| "red" \| "success" \| "warning" \| "yellow"` | `'gray'` |
-| `dismissible` | `dismissible` | Whether to display the close button. When set to true, a close icon is displayed on the right side of the tag. Clicking it triggers the `zane-tag--dismiss` event. | `boolean` | `false` |
-| `imageSrc` | `image-src` | Label image address After setting, the specified image (such as user avatar) is displayed on the left side of the label | `string` | `undefined` |
-| `selected` | `selected` | Selected state Indicates whether the tag is selected, often used in multiple selection scenarios | `boolean` | `false` |
-| `size` | `size` | Label size Controls the overall size of the label: <br>1. `md`: medium size (default) <br>2. `sm`: small size (compact layout) | `"md" \| "sm"` | `'md'` |
-| `value` | `value` | Tag value The business data value associated with the tag, which is passed as a parameter when the event is triggered | `string` | `''` |
+| Name                | Description                          | Type                                                   | Default |
+| ------------------- | ------------------------------------ | ------------------------------------------------------ | ------- |
+| type                | type of Tag                          | `'primary' \| 'success' \| 'info' \| 'warning' \| 'danger'` | primary |
+| closable            | whether Tag can be removed           | `boolean`                                              | false   |
+| hit                 | whether Tag has a highlighted border | `boolean`                                              | false   |
+| color               | background color of the Tag          | `string`                                               | —       |
+| size                | size of Tag                          | `'large' \| 'default' \| 'small'`                      | —       |
+| effect              | theme of Tag                         | `'dark' \| 'light' \| 'plain'`                         | light   |
+| round               | whether Tag is rounded               | `boolean`                                              | false   |
 
 ### Events
 
-| Event | Description | Type |
-| --- | --- | --- |
-| `zane-tag--click` | Tab click event is triggered when the tab is clicked (excluding the close button area) | `CustomEvent<any>` |
-| `zane-tag--dismiss` | The tag close event is triggered when the close button is clicked, passing the value or text content of the tag | `CustomEvent<any>` |
+| Name  | Description                  | Type                                      |
+| ----- | ---------------------------- | ----------------------------------------- |
+| zClick | triggers when Tag is clicked | `(evt: CustomEvent<MouseEvent>) => void` |
+| zClose | triggers when Tag is removed | `(evt: CustomEvent<MouseEvent>) => void` |
 
-### Dependencies
+### Slots
 
-#### Used by
-
-- [code-editor](./code-editor)
-- [select](./select)
-
-#### Depends on
-
-- [icon](./icon)
+| Name    | Description               |
+| ------- | ------------------------- |
+| default | customize default content |

@@ -53,26 +53,26 @@ const SidebarComponents: DefaultTheme.SidebarItem[] = [
       },
       { link: '/en-US/components/cascader', text: 'Cascader' },
       { link: '/en-US/components/checkbox', text: 'Checkbox' },
-      {
-        link: '/en-US/components/color-picker-panel',
-        text: 'ColorPickerPanel',
-      },
-      {
-        link: '/en-US/components/color-picker',
-        text: 'ColorPickerPanel',
-      },
-      {
-        link: '/en-US/components/date-picker-panel',
-        text: 'DatePickerPanel',
-      },
-      {
-        link: '/en-US/components/date-picker',
-        text: 'DatePicker',
-      },
-      {
-        link: '/en-US/components/datetime-picker',
-        text: 'DateTimePicker',
-      },
+      // {
+      //   link: '/en-US/components/color-picker-panel',
+      //   text: 'ColorPickerPanel',
+      // },
+      // {
+      //   link: '/en-US/components/color-picker',
+      //   text: 'ColorPickerPanel',
+      // },
+      // {
+      //   link: '/en-US/components/date-picker-panel',
+      //   text: 'DatePickerPanel',
+      // },
+      // {
+      //   link: '/en-US/components/date-picker',
+      //   text: 'DatePicker',
+      // },
+      // {
+      //   link: '/en-US/components/datetime-picker',
+      //   text: 'DateTimePicker',
+      // },
       {
         link: '/en-US/components/form',
         text: 'Form',
@@ -113,14 +113,14 @@ const SidebarComponents: DefaultTheme.SidebarItem[] = [
         link: '/en-US/components/switch',
         text: 'Switch',
       },
-      {
-        link: '/en-US/components/time-picker',
-        text: 'TimePicker',
-      },
-      {
-        link: '/en-US/components/time-select',
-        text: 'TimeSelect',
-      },
+      // {
+      //   link: '/en-US/components/time-picker',
+      //   text: 'TimePicker',
+      // },
+      // {
+      //   link: '/en-US/components/time-select',
+      //   text: 'TimeSelect',
+      // },
       {
         link: '/en-US/components/transfer',
         text: 'Transfer',
@@ -188,7 +188,6 @@ const SidebarComponents: DefaultTheme.SidebarItem[] = [
       { link: '/en-US/components/notification', text: 'Notification' },
       { link: '/en-US/components/popconfirm', text: 'Popconfirm' },
       { link: '/en-US/components/popover', text: 'Popover' },
-      { link: '/en-US/components/tooltip', text: '文Tooltip' },
       { link: '/en-US/components/tooltip', text: 'Tooltip' },
     ],
   },
@@ -216,7 +215,7 @@ export const en = defineConfig({
       text: 'Edit this page on GitHub',
     },
     footer: {
-      copyright: `Copyright © 2020-${new Date().getFullYear()} ZaneJS`,
+      copyright: `Copyright © 2020-${new Date().getFullYear()} ZaneLab`,
       message: 'Released under the MIT License.',
     },
     langMenuLabel: 'Language',

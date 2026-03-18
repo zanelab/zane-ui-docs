@@ -21,7 +21,38 @@
 ## 常见页面布局
 
 <style lang="scss">
-@use '../../examples/container/common-layout.scss';
+.common-layout {
+  .zane-header,
+  .zane-footer,
+  .zane-main,
+  .zane-aside {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .zane-header,
+  .zane-footer {
+    background-color: var(--zane-color-primary-light-7);
+    color: var(--zane-text-color-primary);
+    text-align: center;
+  }
+
+  .zane-aside {
+    background-color: var(--zane-color-primary-light-8);
+    color: var(--zane-text-color-primary);
+    text-align: center;
+  }
+
+  .zane-main {
+    background-color: var(--zane-color-primary-light-9);
+    color: var(--zane-text-color-primary);
+    text-align: center;
+
+    height: 150px;
+  }
+}
+
 </style>
 
 ### 

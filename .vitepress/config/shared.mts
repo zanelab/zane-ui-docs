@@ -15,9 +15,9 @@ import {
 
 import { search } from './search.mts';
 
-const ogUrl = 'https://www.zanejs.com/';
+const ogUrl = 'https://www.zanelab.vip/';
 const ogImage = `${ogUrl}og.png#1`;
-const title = 'ZaneJS';
+const title = 'ZaneUI';
 const description = '';
 
 const Head: HeadConfig[] = [
@@ -46,7 +46,7 @@ const Head: HeadConfig[] = [
     {
       href: '/search.xml',
       rel: 'search',
-      title: 'ZaneJs',
+      title: 'ZaneUI',
       type: 'application/opensearchdescription+xml',
     },
   ],
@@ -81,9 +81,9 @@ export const shared = defineConfig({
       },
       provider: 'local',
     },
-    siteTitle: 'ZaneJS',
+    siteTitle: 'ZaneUI',
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/zanedeng/zanejs' },
+      { icon: 'github', link: 'https://github.com/zanelab/zane-ui' },
     ],
   },
   title,

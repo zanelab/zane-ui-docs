@@ -2,7 +2,7 @@
 <template>
   <zane-space direction="vertical">
     <zane-text>
-      <zane-icon name="data-analysis"></zane-icon>
+      <zane-icon name="code-line"></zane-icon>
       ZaneJS
     </zane-text>
     <zane-row>
@@ -11,7 +11,7 @@
     </zane-row>
     <zane-text>
       This is text mixed icon
-      <zane-icon name="bell"></zane-icon>
+      <zane-icon name="bell-line"></zane-icon>
       and component
       <zane-button>Button</zane-button>
     </zane-text>

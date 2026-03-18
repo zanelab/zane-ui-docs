@@ -123,17 +123,17 @@ Add `size` attribute to change the size of Input. In addition to the default siz
 
 | Name              | Description                                                                                           | Type                                                 |
 | ----------------- | ----------------------------------------------------------------------------------------------------- | ---------------------------------------------------- |
-| blur              | triggers when Input blurs                                                                             | `(event: FocusEvent) => void`             |
-| focus             | triggers when Input focuses                                                                           | `(event: FocusEvent) => void`             |
-| change            | triggers when the input box loses focus or the user presses Enter, only if the modelValue has changed | `(value: string \| number) => void`       |
-| input             | triggers when the Input value change                                                                  | `(value: string \| number) => void`       |
-| clear             | triggers when the Input is cleared by clicking the clear button                                       | `() => void`                              |
-| keydown           | triggers when a key is pressed down                                                                   | `(event: KeyboardEvent \| Event) => void` |
-| mouseleave        | triggers when the mouse leaves the Input element                                                      | `(event: MouseEvent) => void`             |
-| mouseenter        | triggers when the mouse enters the Input element                                                      | `(event: MouseEvent) => void`             |
-| compositionstart  | triggers when the composition starts                                                                  | `(event: CompositionEvent) => void`       |
-| compositionupdate | triggers when the composition is updated                                                              | `(event: CompositionEvent) => void`       |
-| compositionend    | triggers when the composition ends                                                                    | `(event: CompositionEvent) => void`       |
+| zBlur              | triggers when Input blurs                                                                             | `(event: FocusEvent) => void`             |
+| zFocus             | triggers when Input focuses                                                                           | `(event: FocusEvent) => void`             |
+| zChange            | triggers when the input box loses focus or the user presses Enter, only if the modelValue has changed | `(value: string \| number) => void`       |
+| zInput             | triggers when the Input value change                                                                  | `(value: string \| number) => void`       |
+| zClear             | triggers when the Input is cleared by clicking the clear button                                       | `() => void`                              |
+| zKeyDown           | triggers when a key is pressed down                                                                   | `(event: KeyboardEvent \| Event) => void` |
+| zMouseLeave        | triggers when the mouse leaves the Input element                                                      | `(event: MouseEvent) => void`             |
+| ZMouseEnter        | triggers when the mouse enters the Input element                                                      | `(event: MouseEvent) => void`             |
+| zCompositionStart  | triggers when the composition starts                                                                  | `(event: CompositionEvent) => void`       |
+| zCompositionUpdate | triggers when the composition is updated                                                              | `(event: CompositionEvent) => void`       |
+| zCompositionEnd    | triggers when the composition ends                                                                    | `(event: CompositionEvent) => void`       |
 
 ### Slots
 
@@ -148,9 +148,9 @@ Add `size` attribute to change the size of Input. In addition to the default siz
 
 | Name                 | Description                      | Type                                                    |
 | -------------------- | -------------------------------- | ------------------------------------------------------- |
-| blur                 | blur the input element           | `() => void`                                 |
+| zFocus               | focus the input element          | `() => void`                                 |
+| zBlur                | blur the input element           | `() => void`                                 |
 | clear                | clear input value                | `() => void`                                 |
-| focus                | focus the input element          | `() => void`                                 |
 | input                | HTML input element               | `HTMLInputElement`                        |
 | resizeTextarea       | resize textarea                  | `() => void`                                 |
 | select               | select the text in input element | `() => void`                                 |

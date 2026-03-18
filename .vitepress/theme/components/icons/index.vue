@@ -1,11 +1,14 @@
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue';
+import { computed, onMounted, ref, watch } from 'vue';
 
 import clipboardCopy from 'clipboard-copy';
 
 import { useLang } from '../../../composables/lang';
 import localeData from '../../../i18n/component/icons.json';
-import { icons } from './icons';
+import { iconCategories } from '@zanejs/icons';
+import { debounce } from 'lodash-es';
+
+// import { icons } from './icons';
 
 const queryInputRef = ref();
 
@@ -14,19 +17,39 @@ const locale = computed(() => (localeData as any)[lang.value]);
 const copyIcon = ref(true);
 
 const query = ref('');
+const debouncedQuery = ref('');
+
+watch(query, debounce((newQuery) => {
+  debouncedQuery.value = newQuery
+}, 300))
 
 const filterCategories = computed(() => {
-  return icons
-    .map((category) => {
-      const items = category.items.filter((icon) => {
-        return icon?.toLowerCase().includes(query.value.toLowerCase());
-      });
-      return { ...category, items };
-    })
-    .filter((category) => category.items.length);
+  const searchTerm = debouncedQuery.value.toLowerCase().trim();
+  if (!searchTerm) {
+    return iconCategories
+  }
+
+  const result = {}
+  
+  Object.entries(iconCategories).forEach(([category, icons]) => {
+    // 检查分类名是否匹配
+    const categoryMatches = category.toLowerCase().includes(searchTerm)
+    
+    // 过滤图标
+    const filtered = icons.filter(icon => 
+      icon.toLowerCase().includes(searchTerm)
+    )
+    
+    // 如果分类名匹配或该分类下有匹配的图标
+    if (categoryMatches || filtered.length > 0) {
+      result[category] = categoryMatches ? icons : filtered
+    }
+  })
+  
+  return result
 });
 
-const handleIconQueryChange = (event: CustomEvent) => {
+const handleIconQueryInput = (event: CustomEvent) => {
   query.value = event.detail;
 };
 
@@ -53,7 +76,7 @@ const handleCopyIcon = async (icon: string) => {
 };
 
 onMounted(() => {
-  queryInputRef.value?.addEventListener('zUpdate', handleIconQueryChange);
+  queryInputRef.value?.addEventListener('zInput', handleIconQueryInput);
 });
 </script>
 <template>
@@ -65,18 +88,17 @@ onMounted(() => {
         prefix-icon="search"
         size="large"
         placeholder="Search Icons"
-        @z-change="handleIconQueryChange"
       />
     </div>
     <div
-      v-for="item in filterCategories"
-      :key="item.name"
+      v-for="(icons, category) in filterCategories"
+      :key="category"
       class="demo-icon-item"
     >
-      <div class="demo-icon-title">{{ item.name }}</div>
+      <div class="demo-icon-title">{{ category }}</div>
       <ul class="demo-icon-list">
         <li
-          v-for="icon in item.items"
+          v-for="icon in icons"
           :key="icon"
           class="icon-item"
           @click="handleCopyIcon(icon)"
@@ -111,7 +133,7 @@ onMounted(() => {
   &-list {
     position: relative;
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     padding: 0;
     overflow: hidden;
     list-style: none;
