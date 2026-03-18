@@ -106,6 +106,3 @@ xs, sm, md, lg and xl.
 | ------- | ------------------------- |
 | default | customize default content |
 
-<style lang="scss">
-@use '../../examples/layout/index.scss';
-</style>

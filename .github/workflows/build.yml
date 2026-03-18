@@ -19,7 +19,7 @@ permissions:
 
 jobs:
   post-update:
-    if: github.repository == 'zanedeng/zanejs'
+    if: github.repository == 'zanelab/zane-ui-docs'
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
