@@ -1,37 +1,60 @@
-name: Deploy Website on push
+name: Deploy VitePress site to GitHub Pages
 
 on:
+  # Runs on pushes targeting the default branch
   push:
-    branches:
-      - main
+    branches: [main]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+concurrency:
+  group: pages
+  cancel-in-progress: false
 
 jobs:
-  deploy-docs-ftp:
-    name: Deploy Docs to GitHub Pages
-    if: github.actor != 'dependabot[bot]' && !contains(github.event.head_commit.message, '[skip ci]') && github.repository == 'zanelab/zane-ui-docs'
+  # Build job
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
+      - name: Checkout
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0
-
+          fetch-depth: 0 # Not needed if lastUpdated is not enabled
       - name: Setup Node
-        uses: ./.github/actions/setup-node
-
-      - name: Build
-        run: pnpm build
-
-      
-      - name: Push to zane-ui-docs
-        id: push_directory
-        uses: cpina/github-action-push-to-another-repository@target-branch
-        env:
-          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+        uses: actions/setup-node@v4
         with:
-          source-directory: ./.vitepress/dist
-          destination-github-username: 'zanelab'
-          destination-repository-name: 'zane-ui-docs'
-          user-email: ${{ secrets.USER_EMAIL }}
-          commit-message: See ORIGIN_COMMIT from $GITHUB_REF
-          target-branch: gh-pages
+          node-version: 20
+          cache: pnpm
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+      - name: Install pnpm
+        run: npm install -g pnpm
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Build with VitePress
+        run: pnpm run build
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .vitepress/dist
+
+  # Deployment job
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
